@@ -1,0 +1,127 @@
+[
+  {
+    "date": "2019-01-30T00:00:00.000Z",
+    "home_team": "Boston Celtics",
+    "visitor_team": "Charlotte Hornets"
+  },
+  {
+    "date": "2019-02-09T00:00:00.000Z",
+    "home_team": "Boston Celtics",
+    "visitor_team": "LA Clippers"
+  },
+  {
+    "date": "2019-02-08T00:00:00.000Z",
+    "home_team": "Philadelphia 76ers",
+    "visitor_team": "Denver Nuggets"
+  },
+  {
+    "date": "2019-02-08T00:00:00.000Z",
+    "home_team": "Washington Wizards",
+    "visitor_team": "Cleveland Cavaliers"
+  },
+  {
+    "date": "2019-02-08T00:00:00.000Z",
+    "home_team": "Sacramento Kings",
+    "visitor_team": "Miami Heat"
+  },
+  {
+    "date": "2019-02-11T00:00:00.000Z",
+    "home_team": "Detroit Pistons",
+    "visitor_team": "Washington Wizards"
+  },
+  {
+    "date": "2019-02-08T00:00:00.000Z",
+    "home_team": "New Orleans Pelicans",
+    "visitor_team": "Minnesota Timberwolves"
+  },
+  {
+    "date": "2019-02-09T00:00:00.000Z",
+    "home_team": "Indiana Pacers",
+    "visitor_team": "Cleveland Cavaliers"
+  },
+  {
+    "date": "2019-02-09T00:00:00.000Z",
+    "home_team": "Atlanta Hawks",
+    "visitor_team": "Charlotte Hornets"
+  },
+  {
+    "date": "2019-02-09T00:00:00.000Z",
+    "home_team": "Utah Jazz",
+    "visitor_team": "San Antonio Spurs"
+  },
+  {
+    "date": "2019-02-09T00:00:00.000Z",
+    "home_team": "Chicago Bulls",
+    "visitor_team": "Washington Wizards"
+  },
+  {
+    "date": "2019-02-10T00:00:00.000Z",
+    "home_team": "Dallas Mavericks",
+    "visitor_team": "Portland Trail Blazers"
+  },
+  {
+    "date": "2019-02-10T00:00:00.000Z",
+    "home_team": "Philadelphia 76ers",
+    "visitor_team": "Los Angeles Lakers"
+  },
+  {
+    "date": "2019-02-10T00:00:00.000Z",
+    "home_team": "Sacramento Kings",
+    "visitor_team": "Phoenix Suns"
+  },
+  {
+    "date": "2019-02-09T00:00:00.000Z",
+    "home_team": "Milwaukee Bucks",
+    "visitor_team": "Orlando Magic"
+  },
+  {
+    "date": "2019-02-09T00:00:00.000Z",
+    "home_team": "Houston Rockets",
+    "visitor_team": "Oklahoma City Thunder"
+  },
+  {
+    "date": "2019-02-10T00:00:00.000Z",
+    "home_team": "Golden State Warriors",
+    "visitor_team": "Miami Heat"
+  },
+  {
+    "date": "2019-02-10T00:00:00.000Z",
+    "home_team": "Atlanta Hawks",
+    "visitor_team": "Orlando Magic"
+  },
+  {
+    "date": "2019-02-11T00:00:00.000Z",
+    "home_team": "Houston Rockets",
+    "visitor_team": "Dallas Mavericks"
+  },
+  {
+    "date": "2019-02-11T00:00:00.000Z",
+    "home_team": "Toronto Raptors",
+    "visitor_team": "Brooklyn Nets"
+  },
+  {
+    "date": "2019-02-12T00:00:00.000Z",
+    "home_team": "Atlanta Hawks",
+    "visitor_team": "Los Angeles Lakers"
+  },
+  {
+    "date": "2019-02-11T00:00:00.000Z",
+    "home_team": "Indiana Pacers",
+    "visitor_team": "Charlotte Hornets"
+  },
+  {
+    "date": "2019-02-11T00:00:00.000Z",
+    "home_team": "Chicago Bulls",
+    "visitor_team": "Milwaukee Bucks"
+  },
+  {
+    "date": "2019-02-12T00:00:00.000Z",
+    "home_team": "Golden State Warriors",
+    "visitor_team": "Utah Jazz"
+  },
+  {
+    "date": "2019-02-12T00:00:00.000Z",
+    "home_team": "Memphis Grizzlies",
+    "visitor_team": "San Antonio Spurs"
+  }
+]
