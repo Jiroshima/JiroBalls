@@ -1,11 +1,23 @@
 from flask import Flask, render_template, request
 import requests
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime 
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usernames.db'
+db = SQLAlchemy(app)
+
+
+class usernames(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(200), nullable = False)
+	date_created = db.column(db.DateTime, default=datetime.utcnow)
+
+	def __repr__(self):
+		return '<name %r>' % self.id
 
 Users = []
-
 
 
 
