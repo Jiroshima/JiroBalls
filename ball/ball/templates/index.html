@@ -1,12 +1,26 @@
-{% extends 'base.html' %}
-{% block title %}Welcome to Ball is Life{% endblock %}
-
+{% extends 'base.html' %} {% block title %}Welcome to Ball is Life{% endblock %}
 {% block content %}
-	<div class="container">
-   	 <h1>Welcome to Ball is Life...</h1>
-	 <br>
-	 <br>
-	 <h4><em>Check out these games: </em></h4>
-   	</div>
+<div class="container">
+  <h1>Welcome to Ball is Life...</h1>
+  <br/>
+  <br/>
+  <h4><em>Check out these games: </em></h4>
+  <table>
+	<tr> 
+		<th>Date</th>
+		<th>Home Team</th>
+		<th>Away Team</th>
+		<th><img src="{{ url_for('static', filename='star.svg') }}"></th>
+	</tr>
+	{% for game in data %}
+	<tr>
+		<td class="table-date">{{ game["date"][:10] }}</td>
+		<td class="table-home">{{ game["home_team"] }}</td>
+		<td	class="table-away">{{ game["visitor_team"] }}</td>
+		<td><img src="{{ url_for('static', filename='star.svg') }}"></td>
+	</tr> 
+  {% endfor %}
+  </table>
+</div>
 
 {% endblock %}
