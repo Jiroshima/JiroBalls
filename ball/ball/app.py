@@ -1,15 +1,26 @@
 from flask import Flask, render_template, request
 import requests
+from flask_sqlalchemy import SQLAlchemy	
+from datetime import datetime
+from sqlalchemy import Identity 
+db = SQLAlchemy()
+
+class User(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String, unique = True, nullable = False)
+	password = db.Column(db.String, nullable = False)
+	date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+	def __repr__(self):
+		return '<name %r>' % self.id
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
+db.init_app(app)
 
-Users = []
-
-
-# @app.route('/')
-# def index():
-# 	return render_template("index.html")	
+with app.app_context():
+    db.create_all()
 
 
 @app.route("/profile")
