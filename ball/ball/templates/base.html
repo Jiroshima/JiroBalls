@@ -26,11 +26,15 @@
         <li class="nav-item">
           <a class="nav-link" href="/profile">Profile</a>
         </li>
+        {% if not session['username'] %}
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        {% endif %}
       </ul>
-
     </div>
 
   </div>

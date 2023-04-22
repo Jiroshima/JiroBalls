@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
-
 {% block content %}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for msg in messages %}
-          <p>{{msg}}</p>
-        {% endfor %}
-     {% endif %}
-   {% endwith %}
 
 <div class="container">
   <h1 class="mb-4 mt-5">Login</h1>
@@ -23,12 +15,8 @@
       name="username">
     </div>
     <div class="mb-35 w-25">
-      <input 
-      type="password" 
-      class="form-control" 
-      id="exampleInputPassword1" 
-      placeholder="Password" 
-      name="password">
+      <input type="text" class="form-control" id="exampleInputPassword1" 
+      placeholder="Password" name="password">
     </div>
     <br/>
     
@@ -36,8 +24,8 @@
       <button type="submit" class="btn btn-secondary">Login</button>
     </form>
     <a button class="btn btn-outline-secondary d-inline-flex align-items-center" type="button" href="/register">Register</a>
-    
-
+        <br>
+        <FONT COLOR="#ff0000"> Please try again!</FONT>
   </div>
 </div>
 
@@ -45,5 +33,4 @@
 
 {% endblock %}
 
-<!-- login html template with the form. It uses method = POST to post to /login in
-the app.py file -->
+<!-- failed html template with the form. Same as login but prints an error message -->

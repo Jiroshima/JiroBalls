@@ -14,10 +14,14 @@
 	</tr>
 	{% for game in data %}
 	<tr>
-		<td class="table-date">{{ game["date"][:10] }}</td>
-		<td class="table-home">{{ game["home_team"] }}</td>
-		<td	class="table-away">{{ game["visitor_team"] }}</td>
-		<td><img src="{{ url_for('static', filename='star.svg') }}"></td>
+		<form action="/favourites" method="post">
+			<td class="table-date">{{ game["date"][:10] }}</td>
+			<td class="table-home">{{ game["home_team"] }}</td>
+			<td	class="table-away">{{ game["visitor_team"] }}</td>
+			<td>
+			<button name="star" img src="{{ url_for('static', filename='star.svg') }}"></button>
+			</form>
+		</td>
 	</tr> 
   {% endfor %}
   </table>
@@ -29,3 +33,6 @@
 <!-- This is the template for the homepage, it displays a welcome message, then a 
 a header. It then uses a for loop to display the date, home and visitor_team which
 are variables initialised through the app.py  -->
+
+
+
