@@ -2,14 +2,7 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for msg in messages %}
-          <p>{{msg}}</p>
-        {% endfor %}
-     {% endif %}
-   {% endwith %}
-   <!-- flashes error message if message is available  -->
+ 
 
 <div class="container">
   <h1 class="mb-4 mt-5">Login</h1>
@@ -37,7 +30,14 @@
       <button type="submit" class="btn btn-secondary">Login</button>
     </form>
     <a button class="btn btn-outline-secondary d-inline-flex align-items-center" type="button" href="/register">Register</a>
-    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <p style="color: red">{{msg}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+ <!-- flashes error message if message is available  -->
 
   </div>
 </div>

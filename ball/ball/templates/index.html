@@ -2,8 +2,12 @@
 {% block content %}
 <div class="container">
   <h1>Welcome to Ball is Life...</h1>
-  <br/>
-  <br/>
+  	<br/> 
+  	<br/>
+	{% if "user_id" not in session %}
+	<p><em>Please login to save favourites</em></p>
+	{% endif %}
+
   <h4><em>Check out these games: </em></h4>
   <table>
 	<tr> 
@@ -15,7 +19,11 @@
 	{% for game in data %}
 	<tr>
 		<form action="/add-favourite" method="post">
-			<input type="hidden" name="user_id" value="sadada" />
+			{% if "user_id" in session %}
+				{% set user_id = session["user_id"] %}
+			<input type="hidden" name="user_id" value="{{ user_id }}" />
+			{% endif %}
+			<!-- this if statement checks if the user is in session, if it is set the user_id to user_id value in session then POST that value in the form  -->
 			<input type="hidden" name="game_id" value="{{ game['id'] }}" />
 			<input type="hidden" name="home_team" value="{{ game['home_team'] }}" />
 			<input type="hidden" name="away_team" value="{{ game['away_team'] }}" />
@@ -23,15 +31,23 @@
 			<td class="table-date">{{ game["date"][:10] }}</td>
 			<td class="table-home">{{ game["home_team"] }}</td>
 			<td	class="table-away">{{ game["away_team"] }}</td>
+			{% if "user_id" in session %}
 			<td>
-			<button type="submit" class="btn btn-secondary">
-				<img src="{{ url_for('static', filename='star.svg') }}">
-			</button>
-			</a>
-			</form>
-		</td>
+				
+				{% if game["id"] not in favourites %}
+				<button type="submit" class="bg-transparent border-0">
+					<img src="{{ url_for('static', filename='star.svg') }}">
+				</button>
+				{% else %}
+				<button type="submit" class="bg-transparent border-0">
+					<img src="{{ url_for('static', filename='star_filled.svg') }}">
+				</button>
+				{% endif %}
+			</td>
+			{% endif %}
+		</form>
 	</tr> 
-  {% endfor %}
+ 	{% endfor %}
 <!-- Creates a for loop which loops through the dictionary data and extracts the needed information
 and displays it as a table -->
   </table>
