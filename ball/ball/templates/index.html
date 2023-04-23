@@ -10,20 +10,30 @@
 		<th>Date</th>
 		<th>Home Team</th>
 		<th>Away Team</th>
-		<th><img src="{{ url_for('static', filename='star.svg') }}"></th>
+		<th></th>
 	</tr>
 	{% for game in data %}
 	<tr>
-		<form action="/favourites" method="post">
+		<form action="/add-favourite" method="post">
+			<input type="hidden" name="user_id" value="sadada" />
+			<input type="hidden" name="game_id" value="{{ game['id'] }}" />
+			<input type="hidden" name="home_team" value="{{ game['home_team'] }}" />
+			<input type="hidden" name="away_team" value="{{ game['away_team'] }}" />
+			<input type="hidden" name="game_date" value="{{ game['date'][:10] }}" />
 			<td class="table-date">{{ game["date"][:10] }}</td>
 			<td class="table-home">{{ game["home_team"] }}</td>
-			<td	class="table-away">{{ game["visitor_team"] }}</td>
+			<td	class="table-away">{{ game["away_team"] }}</td>
 			<td>
-			<button name="star" img src="{{ url_for('static', filename='star.svg') }}"></button>
+			<button type="submit" class="btn btn-secondary">
+				<img src="{{ url_for('static', filename='star.svg') }}">
+			</button>
+			</a>
 			</form>
 		</td>
 	</tr> 
   {% endfor %}
+<!-- Creates a for loop which loops through the dictionary data and extracts the needed information
+and displays it as a table -->
   </table>
 </div>
 

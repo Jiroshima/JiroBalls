@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, flash
+from flask import Flask, redirect, render_template, request, session, flash
 from datetime import timedelta
 import requests
 from flask_sqlalchemy import SQLAlchemy	
@@ -18,7 +18,7 @@ db.init_app(app)
 #app.config creates the URI which is used for the connection
 
 class User(db.Model):
-	user_id = db.Column(db.Integer, primary_key=True)
+	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String, unique = True, nullable = False)
 	password = db.Column(db.String, nullable = False)
 	date_created = db.Column(db.DateTime, default=datetime.utcnow)
@@ -28,8 +28,8 @@ class User(db.Model):
 		return '<name %r>' % self.id
 #returns a string as a representation of the object
 
-class Games(db.Model):
-	games_id = db.Column(db.Integer, primary_key=True)
+class Game(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
 	home_team = db.Column(db.String)
 	away_team = db.Column(db.String)
 	date = db.Column(db.DateTime, default=datetime.utcnow)
@@ -37,8 +37,8 @@ class Games(db.Model):
 # home team, away team and the date for the game
 	
 User_Favourited = db.Table('favourites',
-			   db.Column('user_id', db.Integer, db.ForeignKey('user.user_id')),
-			   db.Column('games_id', db.Integer, db.ForeignKey('games.games_id'))
+			   db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+			   db.Column('game_id', db.Integer, db.ForeignKey('game.id'))
 			   )
 	
 #Creates a third table for favourites in which the user_id and games_id are foreign keys
@@ -49,6 +49,11 @@ with app.app_context():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+	if request.method == "GET":
+		if "username" in session:
+			return redirect("/profile", code=302)
+		return render_template("login.html")
+	
 	if request.method == "POST":
 		username = request.form.get("username")
 		password = request.form.get("password")
@@ -56,15 +61,12 @@ def login():
 
 		if user_in_db is None:
 			return render_template("failed.html")
-		elif "username" in session:
-			flash("Already Logged In!")
-			return render_template("login.html")
 		else:
 			if user_in_db.password == password:
 				session.permanent = True
 				session["username"] = username
 				return render_template("profile.html")
-	return render_template("login.html")
+	
 #creates a login html template under /login route
 #grabs username and password and compares it with the database.
 #if username is there then it will return loggedin.html template with all user-enabled features
@@ -98,14 +100,16 @@ def getGames():
 
 	data = []
 	for game in games:
+		id = game["id"]
 		date = game["date"]
 		home_team = game["home_team"]["full_name"]
-		visitor_team = game["visitor_team"]["full_name"]
+		away_team = game["visitor_team"]["full_name"]
 
 		game_dict = {
+			"id": id,
 			"date": date,
 			"home_team": home_team, 
-			"visitor_team": visitor_team
+			"away_team": away_team
 		}
 
 		data.append(game_dict)
@@ -132,15 +136,31 @@ def about():
 		return render_template("login.html")
 #checks if username is in session, if it is then display profile.html if not then go back to login page. 
 
-@app.route("/favourites", methods=["POST"])
-def favourites():
+@app.route("/add-favourite", methods=["POST"])
+def addfavourite():
+	user_id = request.form.get("user_id")
+	game_id = request.form.get("game_id")
 	home_team = request.form.get("home_team")
 	away_team = request.form.get("away_team")
-	date = request.form.get("date")
+	game_date = request.form.get("game_date")
+	game_datetime = datetime.strptime(game_date, '%Y-%m-%d')
 
+	game_in_db = db.session.execute(db.select(Game).filter_by(id=game_id)).scalar()
+	if game_in_db is None:
+		game = Game(id=game_id, home_team=home_team, away_team=away_team, date=game_datetime)
+		db.session.add(game)
+		db.session.commit()
+		
+	return redirect("/", code=302)
+#This creates an app route called add-favourite
+#It takes the method post and grabs values for the variables specified and stores them in the table
+#if the favourite button from the index.html is pressed
+#the If statement is used to check if the data is already in the database, if it is
+#then it just renders the template index.html 
 
-	game = Games(home_team=home_team, away_team=away_team, date=date)
-	db.session.add(game)
-	db.session.commit
-	return render_template("index.html")
+@app.route("/user-favourites", methods=["POST"])
+def userfavourites():
+	user_id = request.form.get("user_id")
+	game_id = request.form.get("game_id")
+
 	
